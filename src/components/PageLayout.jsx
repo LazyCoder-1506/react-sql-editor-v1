@@ -2,24 +2,28 @@ import React, { useEffect, useState } from 'react'
 import SqlEditor from './inputSection/SqlEditor'
 import PredefinedQueries from './inputSection/PredefinedQueries'
 import Output from './outputSection/Output'
+import { users } from '../assets/data/users'
+import { movies } from '../assets/data/movies'
+import { orders } from '../assets/data/orders'
 
 const PageLayout = () => {
-  let queryMap = []
+  let queryMap = [
+    {
+      query: "select * from MOVIES",
+      data: movies
+    },
+    {
+      query: "select * from USERS",
+      data: users
+    }
+  ]
 
   const [query, setQuery] = useState("")
   const [results, setResults] = useState([])
   const [orderData, setOrderData] = useState(null)
 
   useEffect(() => {
-    import('../assets/data/users.json').then(data => {
-      queryMap.push({ query: "select * from USERS", data: data })
-    });
-    import('../assets/data/movies.json').then(data => {
-      queryMap.push({ query: "select * from MOVIES", data: data })
-    });
-    import('../assets/data/orders.json').then(data => {
-      setOrderData(data);
-    });
+    setOrderData(orders)
   }, []);
 
   const usePredefinedQuery = (value) => {
@@ -27,6 +31,7 @@ const PageLayout = () => {
   }
 
   const runQuery = () => {
+    console.log(queryMap)
     if (query === "") {
       setResults([])
       return
