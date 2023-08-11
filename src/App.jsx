@@ -1,13 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+
+import PageLayout from './components/PageLayout'
 
 function App() {
 
   return (
     <>
-      <h1 className='text-red-500 font-bold'>Vite + React</h1>
+      <PageLayout />
     </>
   )
 }
