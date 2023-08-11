@@ -1,12 +1,15 @@
+import React, { Suspense, lazy } from 'react'
 import './App.css'
 
-import PageLayout from './components/PageLayout'
+const PageLayout = lazy(() => import('./components/PageLayout'))
 
 function App() {
 
   return (
     <>
-      <PageLayout />
+      <Suspense fallback={<div>Loading...</div>}>
+        <PageLayout />
+      </Suspense>
     </>
   )
 }
