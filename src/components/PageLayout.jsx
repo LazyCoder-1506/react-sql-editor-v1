@@ -9,14 +9,16 @@ const PageLayout = () => {
     setQuery(value)
   }
 
-  
+  const runQuery = () => {
+    console.log(query)
+  }
 
   return (
     <>
       <div className="p-8 bg-[#EFFAFA] min-h-screen">
         <div className="grid grid-cols-2 gap-8">
           <div>
-            <SqlEditor query={query} />
+            <SqlEditor query={query} setQuery={setQuery} runQuery={runQuery} />
           </div>
           <div>
             <PredefinedQueries usePredefinedQuery={usePredefinedQuery} />
