@@ -1,25 +1,44 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SqlEditor from './inputSection/SqlEditor'
 import PredefinedQueries from './inputSection/PredefinedQueries'
 import Output from './outputSection/Output'
+import { users } from '../assets/data/users'
+import { movies } from '../assets/data/movies'
+import { orders } from '../assets/data/orders'
 
-const PageLayout = ({ queryMap, defaultData }) => {
+const PageLayout = () => {
+  let queryMap = [
+    {
+      query: "select * from MOVIES",
+      data: movies
+    },
+    {
+      query: "select * from USERS",
+      data: users
+    }
+  ]
 
   const [query, setQuery] = useState("")
   const [results, setResults] = useState([])
+  const [orderData, setOrderData] = useState(null)
+
+  useEffect(() => {
+    setOrderData(orders)
+  }, []);
 
   const usePredefinedQuery = (value) => {
     setQuery(value)
   }
 
   const runQuery = () => {
+    console.log(queryMap)
     if (query === "") {
       setResults([])
       return
     }
     const queryIndex = queryMap.findIndex(o => o.query === query)
     if (queryIndex === -1) {
-      setResults(defaultData)
+      setResults(orderData)
     } else {
       setResults(queryMap[queryIndex].data)
     }

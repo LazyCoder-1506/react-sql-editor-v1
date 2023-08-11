@@ -1,4 +1,4 @@
-const movies = [
+export const movies = [
   {
     id: 1,
     title: "Many Adventures of Winnie the Pooh, The",
@@ -700,5 +700,3 @@ const movies = [
     release_year: 2012
   }
 ]
-
-export default movies;
