@@ -3,24 +3,24 @@ import SqlEditor from './inputSection/SqlEditor'
 import PredefinedQueries from './inputSection/PredefinedQueries'
 import Output from './outputSection/Output'
 
-import user_data from "../assets/data/users.json"
-import movies_data from "../assets/data/movies.json"
-import orders_data from "../assets/data/orders.json"
-
 const PageLayout = () => {
-  const queryMap = [
-    {
-      query: "select * from USERS",
-      data: user_data
-    },
-    {
-      query: "select * from MOVIES",
-      data: movies_data
-    }
-  ]
+  let queryMap = []
 
   const [query, setQuery] = useState("")
   const [results, setResults] = useState([])
+  const [orderData, setOrderData] = useState(null)
+
+  useEffect(() => {
+    import('../assets/data/users.json').then(data => {
+      queryMap.push({ query: "select * from USERS", data: data })
+    });
+    import('../assets/data/movies.json').then(data => {
+      queryMap.push({ query: "select * from MOVIES", data: data })
+    });
+    import('../assets/data/orders.json').then(data => {
+      setOrderData(data);
+    });
+  }, []);
 
   const usePredefinedQuery = (value) => {
     setQuery(value)
@@ -33,7 +33,7 @@ const PageLayout = () => {
     }
     const queryIndex = queryMap.findIndex(o => o.query === query)
     if (queryIndex === -1) {
-      setResults(orders_data)
+      setResults(orderData)
     } else {
       setResults(queryMap[queryIndex].data)
     }
