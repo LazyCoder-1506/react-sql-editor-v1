@@ -1,4 +1,4 @@
-export const orders = [
+const orders = [
   {
     id: 1,
     drug_name: "RESILIENCE LIFT",
@@ -800,3 +800,5 @@ export const orders = [
     amount: 5
   }
 ]
+
+export default orders;
