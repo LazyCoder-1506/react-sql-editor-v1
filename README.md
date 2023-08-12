@@ -5,7 +5,7 @@ This is a lightweight version of the app. It has only the basic functionalities 
 
 ## Project Overview
 
-![How it looks](screenshots/site.png)
+![How it looks](./screenshots/site.png)
 
 On the top left, the editor is present with two buttons:
 
@@ -30,12 +30,12 @@ On the bottom is the output section.
 
 GTMetrix:
 
-![gtmetrix report](screenshots/gtmetrix.png)
+![gtmetrix report](./screenshots/gtmetrix.png)
 
 Pagespeed:
 
-![pagespeed laptop report](screenshots/pagespeed-laptop.png)
-![pagespeed laptop report](screenshots/pagespeed-mobile.png)
+![pagespeed laptop report](./screenshots/pagespeed-laptop.png)
+![pagespeed laptop report](./screenshots/pagespeed-mobile.png)
 
 ## Optimisation Attempts
 
