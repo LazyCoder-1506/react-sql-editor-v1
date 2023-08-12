@@ -1,47 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useState, lazy } from 'react'
 import SqlEditor from './inputSection/SqlEditor'
 import PredefinedQueries from './inputSection/PredefinedQueries'
-import Output from './outputSection/Output'
-import { users } from '../assets/data/users'
-import { movies } from '../assets/data/movies'
-import { orders } from '../assets/data/orders'
+// import Output from './outputSection/Output'
+
+const Output = lazy(() => import("./outputSection/Output"))
 
 const PageLayout = () => {
-  let queryMap = [
-    {
-      query: "select * from MOVIES",
-      data: movies
-    },
-    {
-      query: "select * from USERS",
-      data: users
-    }
-  ]
-
   const [query, setQuery] = useState("")
-  const [results, setResults] = useState([])
-  const [orderData, setOrderData] = useState(null)
+  const [submittedQuery, setSubmittedQuery] = useState("")
 
-  useEffect(() => {
-    setOrderData(orders)
-  }, []);
 
   const usePredefinedQuery = (value) => {
     setQuery(value)
   }
 
   const runQuery = () => {
-    console.log(queryMap)
-    if (query === "") {
-      setResults([])
-      return
-    }
-    const queryIndex = queryMap.findIndex(o => o.query === query)
-    if (queryIndex === -1) {
-      setResults(orderData)
-    } else {
-      setResults(queryMap[queryIndex].data)
-    }
+    setSubmittedQuery(query)
   }
 
   return (
@@ -55,7 +29,9 @@ const PageLayout = () => {
             <PredefinedQueries usePredefinedQuery={usePredefinedQuery} />
           </div>
           <div className="col-span-2">
-            <Output data={results} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <Output submittedQuery={submittedQuery} />
+            </Suspense>
           </div>
         </div>
       </div>
